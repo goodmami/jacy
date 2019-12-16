@@ -1,0 +1,24 @@
+name: CI
+env:
+  ACE_VERSION: 0.9.30
+  ACE_ARCH: x86-64
+  ACE_URL: http://sweaglesw.org/linguistics/ace/download
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+
+    - name: Setup ACE
+      run: wget -q -O - $ACE_URL/ace-$ACE_VERSION-$ACE_ARCH.tar.gz | tar xzf - -C ./
+
+    - name: Compile grammar
+      if: success()
+      run: ace -g $GITHUB_WORKSPACE/jacy/ace/config.tdl -G jacy.dat
