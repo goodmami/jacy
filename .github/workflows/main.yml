@@ -21,4 +21,4 @@ jobs:
 
     - name: Compile grammar
       if: success()
-      run: ace -g $GITHUB_WORKSPACE/jacy/ace/config.tdl -G jacy.dat
+      run: ace-$ACE_VERSION/ace -g $GITHUB_WORKSPACE/jacy/ace/config.tdl -G jacy.dat
